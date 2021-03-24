@@ -57,12 +57,21 @@ public class DirectorRestController {
 		proS.addProduct(p);
 
 	}
+
 	@PutMapping("/updateProduct")
 	@ResponseBody
-	public void updateProduct(@RequestBody Product p ) {
+	public void updateProduct(@RequestBody Product p) {
 
 		proS.updateProduct(p);
 
+	}
+
+	
+	@DeleteMapping("/deleteProduct/{id}")
+	@ResponseBody
+	public void deleteProduct(@PathVariable("id") Long id) {
+
+		proS.deleteProduct(id);
 	}
 
 	/**
