@@ -1,126 +1,66 @@
 package tn.esprit.spring.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.persistence.*;
+import java.util.Set;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
-
 @Entity
-public class User implements Serializable {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+public class User  implements Serializable {
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "idU")
-	private Long idU;
-	@Column(name = "first_name")
-	private String firstName;
-	@Column(name = "last_name")
-	private String lastName;
-	@Column(name = "password")
-	private String password;
-	@Column(name = "email", unique = true)
-	private String email;
-	private String picture;
-	@Enumerated (EnumType.STRING)
-	private Role role;
-    public Role getDomaine(){
-    	return role;
-    }
-    public enum Role{
- 		CHEF_DEPARTEMENT, ADMINISTRATEUR, INGENIEUR,
- 		}
-    @OneToMany(cascade = CascadeType.ALL, mappedBy="users")
-    private List<Message> Messages;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy="users")
-    private List<Notification> Notifications;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy="users")
-    private List<Claim> Claims;
-  
-    @OneToMany(cascade = CascadeType.ALL, mappedBy="users")
-    private List<Location> locations;
-    
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
+	@Column
+	private String username;
 
-    
-	public User() {
-		super();
-	}
+	@Column
+	@JsonIgnore
+	private String password;
+
+	@Column
+	private String email;
+
+	@Column
+	private String phone;
+
+	@Column
+	private String firstname;
+	@Column
+	private String lastname;
+	@Column
+	private String picture;
+
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable(name = "USER_ROLES", joinColumns = { @JoinColumn(name = "USER_ID") }, inverseJoinColumns = {
+			@JoinColumn(name = "ROLE_ID") })
+	private Set<Role> roles;
 	
-	public User(Long idU, String firstName, String lastName, String password, String email ,String picture) {
-		super();
-		this.idU = idU;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.password = password;
-		this.email = email;
-		this.picture=picture;
-	
+	@OneToMany(mappedBy = "user")
+	private List<Claim> claims = new ArrayList<Claim>();
+
+	public String getFirstname() {
+		return firstname;
 	}
-	
-	
-	public User(String firstName, String lastName, String password, String email) {
-		super();
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.password = password;
-		this.email = email;
+
+	public void setFirstName(String firstname) {
+		this.firstname = firstname;
 	}
-	public Long getIdU() {
-		return idU;
+
+	public String getLastname() {
+		return lastname;
 	}
-	public void setIdU(Long idU) {
-		this.idU = idU;
-	}
-	public String getFirstName() {
-		return firstName;
-	}
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-	public String getLastName() {
-		return lastName;
-	}
-	
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	public Enum getRole() {
-		return role;
-	}
-	public void setRole(Role role) {
-		this.role = role;
-	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+
+	public void setLastName(String lastname) {
+		this.lastname = lastname;
 	}
 
 	public String getPicture() {
@@ -131,37 +71,76 @@ public class User implements Serializable {
 		this.picture = picture;
 	}
 
-	public List<Message> getMessages() {
-		return Messages;
+	public long getId() {
+		return id;
 	}
 
-	public void setMessages(List<Message> messages) {
-		Messages = messages;
+	public void setId(long id) {
+		this.id = id;
 	}
 
-	public List<Notification> getNotifications() {
-		return Notifications;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setNotifications(List<Notification> notifications) {
-		Notifications = notifications;
+	public void setUsername(String username) {
+		this.username = username;
 	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
+	
+	
+	
 
 	public List<Claim> getClaims() {
-		return Claims;
+		return claims;
 	}
 
 	public void setClaims(List<Claim> claims) {
-		Claims = claims;
+		this.claims = claims;
 	}
 
-	public List<Location> getLocations() {
-		return locations;
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
 	}
 
-	public void setLocations(List<Location> locations) {
-		this.locations = locations;
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
 	}
 
- 
+	public User() {
+		super();
+
+	}
+
 }

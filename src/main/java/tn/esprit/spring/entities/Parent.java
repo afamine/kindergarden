@@ -1,5 +1,7 @@
 package tn.esprit.spring.entities;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -14,35 +16,44 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 @Entity
-public class Parent extends User {
+public class Parent extends User implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4582495806072842620L;
+
+	/*@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "idParent")
+	private Long idParent;*/
 
     private Date dateReg;
     private String adresse;
     private String etatCivil;
- 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy="parent")
-    private List<Child> Child;
     
-    @OneToOne(mappedBy="parent")
-    private Garden garden;
-    @OneToMany(mappedBy="parent")
-	 private List<Inscription> inscriptions;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy="parents")
-    private List<Product> products;
-	@OneToMany(mappedBy="parent")
-	private List<Appointment> appointments;
-    @OneToMany(mappedBy="parent")
-	private List<Panier> paniers;
-	public Parent(String firstName, String lastName, String password, String email,  Date dateReg,
-			String adresse, String etatCivil) {
-		super( firstName, lastName, password, email);
-		
-		this.dateReg = dateReg;
-		this.adresse = adresse;
-		this.etatCivil = etatCivil;
+//    @OneToMany
+//    private List<Order>orders = new ArrayList<Order>();
+ 
+    
+    
+    
+  
+//    public Parent(String username, String password, String email, String phone, String firstname, String lastname, String picture) {
+//		super();
+//
+//	}
+//    public Parent( String firstName, String lastName, String password, String email, Long idParent,Date dateReg,String adresse,String etatcivil) {
+//		super();
+//	//	this.idParent = idParent;
+//		this.dateReg=dateReg;
+//		this.adresse=adresse;
+//		this.etatCivil=etatCivil;
+//	}
+
+	public Parent() {
+		super();
 		
 	}
-
 	public Date getDateReg() {
 		return dateReg;
 	}
@@ -61,6 +72,12 @@ public class Parent extends User {
 	public void setEtatCivil(String etatCivil) {
 		this.etatCivil = etatCivil;
 	}
+//	public List<Order> getOrders() {
+//		return orders;
+//	}
+//	public void setOrders(List<Order> orders) {
+//		this.orders = orders;
+//	}
 
 
     

@@ -16,31 +16,34 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class Director  extends User {
-private int numD;
-private String cv;
-@Temporal(TemporalType.DATE)
-private Date startYear ;
-@OneToOne(mappedBy="director")
-private Garden garden;
+public class Director extends User implements Serializable {
 
-@OneToMany(cascade = CascadeType.ALL, mappedBy="directors")
-private List<Product> products;
-@OneToMany(mappedBy="director")
-private List<Appointment> appointments;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private int numD;
+	private String cv;
+	@Temporal(TemporalType.DATE)
+	private Date startYear;
+
 	public Director() {
 		super();
 	}
 
-	public Director(String firstName, String lastName, String password,String email  ,int numD,String cv,Date startYear) {
-		super( firstName,  lastName, password,email );
-	
-		this.numD=numD;
-		this.cv=cv;
-		this.startYear=startYear;
-		
-	}
+	/*
+	 * public Director(Long idU, String firstName, String lastName, String
+	 * password,String email ,String picture, Boolean role,int numD,String cv,Date
+	 * startYear) { super( idU,firstName, lastName, password,email,picture,role );
+	 * 
+	 * this.numD=numD; this.cv=cv; this.startYear=startYear;
+	 * 
+	 * }
+	 */
 
+	
+	
 	public int getNumD() {
 		return numD;
 	}
@@ -64,7 +67,5 @@ private List<Appointment> appointments;
 	public void setStartYear(Date startYear) {
 		this.startYear = startYear;
 	}
-	
 
-	
 }
