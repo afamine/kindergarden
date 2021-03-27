@@ -7,6 +7,7 @@ public interface IProductService {
 	public void addProduct(Product p);
 	public void updateProduct(Product p);
 	public void deleteProduct(Long id );
+
 	
 
 }

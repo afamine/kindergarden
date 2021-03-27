@@ -4,7 +4,7 @@ package tn.esprit.spring.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import tn.esprit.spring.entities.Claim;
+
 import tn.esprit.spring.entities.Product;
 import tn.esprit.spring.repository.IProductRep;
 

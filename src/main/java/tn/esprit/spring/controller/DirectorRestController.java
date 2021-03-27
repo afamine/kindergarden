@@ -50,6 +50,13 @@ public class DirectorRestController {
 		return orderS.getAll();
 	}
 
+	/**
+	 * 
+	 * 
+	 * crud claim
+	 * 
+	 */
+
 	@PostMapping("/addProduct")
 	@ResponseBody
 	public void creerProduct(@RequestBody Product p) {
