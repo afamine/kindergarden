@@ -22,7 +22,7 @@ public class CategoryForum implements Serializable{
     private String nameF;
     private String descriptionF;
     private String StatusF;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy="categoryForum")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="categoryForumm")
     private List<Publication> publications;
 
 }

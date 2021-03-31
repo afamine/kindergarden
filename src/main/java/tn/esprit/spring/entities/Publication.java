@@ -36,7 +36,7 @@ public class Publication implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy="publications")
     private List<Comment> Comments;
     @ManyToOne
-    CategoryForum categoryForum;
+    CategoryForum categoryForumm;
     public Publication() {
 		super();
 	}
